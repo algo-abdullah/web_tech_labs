@@ -119,30 +119,25 @@ function calculateFinalPrice(basePrice, taxRate , discountpercentage)
 console.log("task 7");
 console.log(calculateFinalPrice(100, 24, 20));
 
-function paginateData(items, pageNumber, pageSize)
- {
-    if (!pageSize && pageSize <0)
-    {
-        pageSize = 5;
-    }
-    var data = [];
-    var size = items.length;
-    var start = 0;
-
-    for (let i = 0; i < items.length; i++) {
-        
-        
-    }
-    
-
-
-
+function paginateData(items, pageNumber, pageSize = 5)
+{
+    const totalPages = Math.ceil(items.length / pageSize);
+    const startIndex = (pageNumber - 1) * pageSize;
+    const data = items.slice(startIndex, startIndex + pageSize);
 
     return {
-        data : data,
-        currentPage: currentPage,
+        data: data,
+        currentPage: pageNumber,
         totalPages: totalPages,
-        hasNext : true,
-        hasprev: true
-    }
- }
+        hasNext: pageNumber < totalPages,
+        hasPrev: pageNumber > 1
+    };
+}
+
+console.log("task 8");
+const allProducts = ['Laptop', 'Monitor', 'Keyboard', 'Mouse', 'Desk', 'Chair', 'Webcam', 'Headphones'];
+console.log(paginateData(allProducts, 2, 3));
+
+
+
+
